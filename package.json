@@ -7,6 +7,9 @@
         "dev": "vite",
         "build": "vite build --outDir=docs --base=./"
     },
+    "dependencies": {
+        "excalibur": "^0.27.0"
+    },
     "devDependencies": {
         "vite": "^4.2.0"
     }
