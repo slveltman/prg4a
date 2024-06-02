@@ -3,7 +3,7 @@ import { Engine } from "excalibur";
 import { Resources, ResourceLoader } from './resources.js';
 import { Plane } from "./classes/plane.js";
 import { Background } from "./classes/background.js";
-import { DevTool } from "@excaliburjs/dev-tools";
+// import { DevTool } from "@excaliburjs/dev-tools";
 import { Bird } from "./classes/bird.js";
 import { Spawner } from "./classes/spawner.js";
 import { Score } from "./classes/score.js";
@@ -37,4 +37,4 @@ export class Game extends Engine {
     }
 }
 
-new DevTool(new Game());
+new Game();
