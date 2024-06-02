@@ -1,44 +1,29 @@
-import {Color, Font, FontUnit, Input, Label, Scene, Vector as textAlign, Vector} from "excalibur";
-import { Game } from "./game.js";
-import {Background} from "./classes/background.js";
+import {Scene, Label, Vector, Input, Font, FontUnit} from "excalibur";
 
-export class Startscreen extends Scene {
+export class StartScreen extends Scene {
     constructor() {
         super();
+        this.startLabel = new Label({
+            text: "Press SPACE to Start " +
+                "en ontwijk de vogels",
+            pos: new Vector(200, 200),
+            font: new Font({
+                family: 'impact',
+                size: 50,
+                unit: FontUnit.Px
+            }),
+        });
+
     }
 
     onInitialize(engine) {
+        this.add(this.startLabel);
 
-        const Game1 = new Game();
-        engine.addScene("Game", Game1);
-
-        const startMessage = new Label({
-            text: "PRESS SPACE TO CONTINUE",
-            pos: new Vector(innerWidth/2, innerHeight - 200),
-            font: new Font({
-                family: 'impact',
-                color: Color.Red,
-                size: 50,
-                unit: FontUnit.Px
-            })
-        })
-
-        startMessage.pos.x = innerWidth/2 - startMessage.getTextWidth()*2
-
-        // Event listener for start button click
-        settings.on("pointerup", () => {
-            //Go to settings scene
+        // Listen for the spacebar to start the game
+        engine.input.keyboard.on('press', (evt) => {
+            if (evt.key === Input.Keys.Space) {
+                engine.goToScene('gamescreen');
+            }
         });
-
-        // Add the label actor to the scene
-        const menuBackground = new Background('Background', 50)
-        this.add(menuBackground)
-        this.add(startMessage)
-    }
-
-    onPostUpdate(engine, delta) {
-        if(engine.input.keyboard.wasPressed(Input.Keys.Space)) {
-            engine.goToScene("Game");
-        }
     }
 }

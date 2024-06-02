@@ -1,31 +1,32 @@
-import {Engine, Scene, Label, Vector, Timer} from "excalibur";
+import {Actor, Label, Vector, Color, Font, FontUnit} from "excalibur";
 
-export class GameScene extends Scene {
+export class Score extends Actor {
+    score
     constructor() {
         super();
         this.score = 0;
         this.scoreLabel = new Label({
             text: "Score: 0",
-            pos: new Vector(10, 10),
-            fontSize: 20,
-            color: "white",
+            pos: new Vector(50, 50),
+            font: new Font({
+                family: 'Arial',
+                size: 30,
+                unit: FontUnit.Px
+            }),
+            color: Color.Black
         });
     }
 
     onInitialize(engine) {
-        // Voeg de scorelabel toe aan de scene
-        this.add(this.scoreLabel);
+        engine.add(this.scoreLabel);
+    }
 
-        // Start de timer om elke seconde een punt toe te voegen aan de score
-        const timer = new Timer({
-            interval: 1000,
-            fcn: () => {
-                this.score++;
-                this.scoreLabel.text = `Score: ${this.score}`;
-            },
-            repeats: true,
-        });
-        engine.add(timer);
-        timer.start();
+    increment() {
+        this.score++;
+        this.scoreLabel.text = `Score: ${this.score}`;
+    }
+
+    getScore() {
+        return this.score;
     }
 }

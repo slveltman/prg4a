@@ -1,33 +1,40 @@
-import '../css/style.css'
-import {Actor, Engine, Physics, Vector} from "excalibur"
-import { Resources, ResourceLoader } from './resources.js'
-import {Fish} from "./classes/fish.js"
-import {Background} from "./classes/background.js";
-import {DevTool} from "@excaliburjs/dev-tools";
-import {Cactus} from "./classes/cactus.js";
-import {Spawner} from "./classes/spawner.js"
-import {GameScene} from "./classes/score.js";
+import '../css/style.css';
+import { Engine } from "excalibur";
+import { Resources, ResourceLoader } from './resources.js';
+import { Plane } from "./classes/plane.js";
+import { Background } from "./classes/background.js";
+import { DevTool } from "@excaliburjs/dev-tools";
+import { Bird } from "./classes/bird.js";
+import { Spawner } from "./classes/spawner.js";
+import { Score } from "./classes/score.js";
+import { EndScreen } from "./endscreen.js";
+import {GameScreen} from "./gamescreen.js";
+import {StartScreen} from "./startscreen.js";
 
 export class Game extends Engine {
 
-    constructor(engine) {
-        super({ width: 1000, height: 600 })
-        this.start(ResourceLoader).then(() =>
-            this.startGame())
-        this.engine = engine
+
+    constructor() {
+        super({ width: 1500, height: 700 });
+        this.start(ResourceLoader).then(() => this.startGame());
     }
 
-    startGame(engine) {
-        const background = new Background()
-        this.add(background)
-        const fish = new Fish()
-        this.add(fish)
-        const cactus1 = new Cactus();
-        this.add(cactus1)
-        const spawner1 = new Spawner
-        this.add(spawner1)
+    startGame() {
 
+        const endScreen = new EndScreen(); // Initialize the EndScreen
+        const gameScreen = new GameScreen()
+        const Startscreen = new StartScreen()
+
+        // Add scenes
+        this.addScene('endscreen', endScreen);
+        this.addScene('gamescreen', gameScreen);
+        this.addScene('startscreen', Startscreen);
+
+
+
+        // Start the game scene (uncomment this to start the game immediately)
+        this.goToScene('startscreen')
     }
 }
 
-new DevTool(new Game())
+new DevTool(new Game());

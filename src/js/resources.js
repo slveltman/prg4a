@@ -1,18 +1,19 @@
 import { ImageSource, Loader } from 'excalibur';
-import fishImage from '../images/fish.png';
-import backgroundImage from '../images/background1.png';
-import cactusImage from "../images/cactus.png";
+import fishImage from '../images/plane.png';
+import backgroundImage from '../images/background.png';
+import birdImage from "../images/img.png";
+import * as ImageWrapping from "excalibur";
 
 const Resources = {
     Fish: new ImageSource(fishImage),
-    Background: new ImageSource(backgroundImage),
-    Cactus: new ImageSource(cactusImage)
+    Background: new ImageSource(backgroundImage, { wrapping: ImageWrapping.Repeat}),
+    bird: new ImageSource(birdImage),
 };
 
 const ResourceLoader = new Loader(
     [Resources.Fish,
     Resources.Background,
-    Resources.Cactus
+    Resources.bird,
 ]);
 
 
